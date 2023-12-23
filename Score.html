@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成績評分</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            background-color: #EBE3D5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .box {
+            width: 520px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        .title {
+            border: 2px solid #776B5D;
+            border-radius: 5px;
+            width: 450px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            font-size: 25px;
+            margin: 20px;
+            padding: 5px;
+        }
+
+        button {
+            border: 0px solid #FAEED1;
+            border-radius: 5px;
+            width: 100px;
+            height: 40px;
+            font-size: 18px;
+            margin: 0 5px 0 5px;
+            cursor: pointer;
+            color: #776B5D;
+            background-color: #EBE3D5;
+        }
+        
+        .submit:hover, .clear:hover {
+            background-color: #FDF7E4;
+        }
+
+        .score {
+            font-size: 30px;
+            padding: 10px;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            font-size: 25px;
+            width: 350px;
+        }
+
+        input:focus {
+            border: none;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="box">
+            <div class="input-box">
+                <div class="title">
+                    成績｜
+                    <input type="number" placeholder="請輸入成績 (0 ~ 100分)" value="">
+                </div>
+            </div>
+            <div class="btns">
+                <button class="submit">確認輸入</button>
+                <button class="clear">清除輸入</button>
+            </div>
+
+            <div class="score">
+                評等: <span class="level"></span>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        /*
+        我要輸入一個數字
+        這個數字是我的成績(0 ~ 100)
+        判斷出你的成績是哪個程度
+        100 A+
+        99~90 A
+        89~80 B+
+        79~70 B
+        69~60 C
+        60~0 D
+      */
+
+        var input = document.querySelector('.box .input-box input');
+        var submitBtn = document.querySelector('.btns .submit');
+        var clearBtn = document.querySelector('.btns .clear');
+        var level = document.querySelector('.score .level');
+
+        // onclick只能綁一次
+        // submitBtn.onclick = function (){
+        //     console.log(123);
+        // };
+
+        // 一樣的效果，addEventListener可以綁多次      
+        submitBtn.addEventListener('click', function () {
+            var myScore = input.value;
+
+            if (myScore > 100) {
+                alert('分數不能大於100');
+            }
+            else if (myScore < 0) {
+                alert('分數不能小於0');
+            } 
+            else if (myScore == null || myScore.trim() === "") {
+                alert('請輸入有效的分數');
+            }
+            
+            else {
+
+                if (myScore >= 100) {
+                    level.innerHTML = 'A++';
+                } else if (myScore >= 99) {
+                    level.innerHTML = 'A+';
+                } else if (myScore >= 89) {
+                    level.innerHTML = 'A';
+                } else if (myScore >= 79) {
+                    level.innerHTML = 'B';
+                } else if (myScore >= 60) {
+                    level.innerHTML = 'C';
+                } else {
+                    level.innerHTML = 'D';
+                }
+            }
+
+        });
+
+        clearBtn.addEventListener('click', function () {
+            console.log(clearBtn);
+            input.value = '';
+            level.innerHTML = '';
+        });
+
+    </script>
+</body>
+
+</html>
